@@ -1,0 +1,8 @@
+# Working directory — backups and plans from a run, never committed.
+work/
+
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/
