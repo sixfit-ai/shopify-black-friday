@@ -69,7 +69,7 @@ prices include VAT and that EU price rules apply.
 </tr>
 </table>
 
-### 2. Pricing scan (read-only)
+### 2. Pricing scan
 
 A pricing snapshot of the store, and what it means. Here the skill also spots that the sets cost
 exactly the sum of their tees, and that the stock numbers look like placeholders.
