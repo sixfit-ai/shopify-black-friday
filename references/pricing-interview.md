@@ -29,8 +29,9 @@ Save answers to `work/bfcm_pricing_brief_<YYYY-MM-DD>.json`, including
 
 | # | Question | Why it matters | If unknown |
 |---|---|---|---|
-| A1 | How would you describe your brand's price position: premium, mid-market, or value? | Premium brands lose more from deep discounts. It decides whether opting out or VIP-only is the right call. | Infer from price levels, then confirm. |
-| A2 | Which approach fits you: a classic discount sale, a VIP / early-access-led sale, or opting out (Green Friday, repair, donation)? | Changes everything downstream. Opt-out means no % discounts at all. | Explain all three in one line each, then ask again. |
+| A1 | How would you describe your brand's price position: premium, mid-market, or value? | Premium brands lose more from deep discounts. It decides whether opting out is worth considering. | Infer from price levels, then confirm. |
+| A2 | Which approach fits you: a classic discount sale, or opting out (Green Friday, repair, donation)? | Changes everything downstream. Opt-out means no % discounts at all. | Explain both in one line each, then ask again. |
+| A2b | **Do you have VIP customers: a group you'd treat specially, like loyal repeat buyers, a loyalty programme, or an email list you'd give early access?** | Turns the optional VIP early-access feature on or off. Most shops don't have one, and that's fine. | **No.** VIP is skipped entirely. |
 | A3 | What did you do last Black Friday (offer, depth, duration), and how did it go? | Evidence beats assumptions. It tells us the realistic uplift. | Use store data (Phase 1 scan). If none, cold-start. |
 | A4 | How often do you run sales during the year, and when was the last one? | Frequent sales mean customers wait for discounts, so a deeper BF adds less. A recent sale also matters for the EU 30-day rule. | Check `compareAtPrice` and past discounts. |
 
@@ -72,7 +73,7 @@ Show any figures the store already has, and ask only for the gaps.
 
 | # | Question | Why it matters | If unknown |
 |---|---|---|---|
-| E1 | Roughly what share of revenue comes from repeat customers? Do you have a VIP group (email list, loyalty, segment)? | Repeat buyers often buy anyway, so deeper VIP discounts are mostly subsidy. It also decides whether VIP early access is possible. | Check segments in the store. |
+| E1 | Roughly what share of revenue comes from repeat customers? | Repeat buyers often buy anyway, which affects how deep a discount needs to go. | Use store data if there are orders. |
 | E2 | Which offer types are you open to: % off, a fixed price (e.g. €99), spend-more-save-more, free-shipping threshold, bundles, gift with purchase? | Each fits a different goal (Phase 4). | Present the options in Phase 4. |
 | E3 | Automatic discounts (no code), or codes for certain audiences? | Automatic converts better. Codes allow channel-specific offers. | Automatic. |
 | E4 | Do you sell elsewhere (marketplaces, retail partners, your own shop) where Black Friday prices would differ? | Channel conflict and parity issues. | Online store only. |
@@ -86,8 +87,27 @@ Ask these while reviewing buckets, never as a form upfront:
 - "<Product> needs <U>% more sales at 20% off to break even. Is its role profit or traffic?"
 - "These <n> products have no cost in Shopify. What's their typical margin?"
 
+## Batch V — VIP early access (only if A2b = yes)
+
+Skip this whole batch when the merchant has no VIP customers. Don't suggest
+VIP early access to them, and don't treat Shopify's default segments (e.g.
+"Email subscribers", created in every store) as a VIP group on their own.
+
+| # | Question | Why it matters | If unknown |
+|---|---|---|---|
+| V1 | Who exactly are your VIPs: repeat buyers, a spend level, a loyalty tier, your email list, or a list in another tool (Klaviyo, a loyalty app)? | Decides how Shopify can recognise them. | Ask again: required. |
+| V2 | *Read the store's segments and show them.* Is one of these your VIP group, or should I create one (e.g. "customers with 2+ orders" or a customer tag)? | Shopify can only target a customer group it knows. Creating a group is a store change and needs approval. | Propose a group from V1, and show its query in plain words. |
+| V3 | How many VIPs, roughly? | A very small group (under ~50) won't move much stock. The public offer has to do the work. | Count the segment members. |
+| V4 | Same discount as the public sale, just earlier, or a deeper one for VIPs? | Same-but-earlier keeps margin. Deeper VIP pricing is mostly subsidy, because VIPs buy anyway (`pricing-math.md` §7). | Same %, earlier. |
+| V5 | How long before Black Friday should VIP access open: 1, 2 or 3 days? | Longer windows lose exclusivity, and VIPs can buy the best stock before the public sale. | 2 days (48h). Maximum 3 days. |
+
+**If the VIP list lives outside Shopify** (e.g. only in Klaviyo) and the
+customers can't be matched to a Shopify segment, use a discount code
+instead: a private VIP code with the same value and window, sent by email.
+Say that codes can be shared.
+
 ## Late start
 
-With fewer than ~10 days to Black Friday, ask only the minimum: A2, B4, B5,
-C1, C2, C5, C6, D3. Say which questions you skipped and which defaults you
+With fewer than ~10 days to Black Friday, ask only the minimum: A2, A2b, B4,
+B5, C1, C2, C5, C6, D3 (plus V1, V2 and V5 if A2b = yes). Say which questions you skipped and which defaults you
 used.

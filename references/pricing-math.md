@@ -163,7 +163,7 @@ margin of the products that would realistically be in the basket.
   it and the discount makes it free. Say this, and that the product page needs
   to explain it.
 
-## 7. VIP early access
+## 7. VIP early access (only if the merchant has VIP customers, interview A2b)
 
 - VIPs are mostly repeat customers who'd likely buy anyway, so a deeper VIP
   discount is mostly a subsidy. **Default: same % as public, earlier.** The

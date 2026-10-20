@@ -105,7 +105,7 @@ snapshot, not as a pass/fail audit.
 | AOV and items per order | `FROM sales SHOW orders, net_sales, net_items_sold, average_order_value SINCE -90d UNTIL today` | `n`, tier and threshold placement |
 | Order value distribution | `orders(first: 250, query: "created_at:>=<today−90d>") { nodes { subtotalPriceSet { shopMoney { amount } } } }`, paginated | Median order; share of orders above a candidate threshold (`pricing-math.md` §6a–b) |
 | Price endings | The last two digits of variant prices (.00 / .95 / .99) | Clean price points (`pricing-math.md` §5) |
-| Customer segments | `segments(first: 50) { nodes { id name query } }` | VIP early access candidates |
+| Customer segments | `segments(first: 50) { nodes { id name query } }` | Shown only if the merchant has VIP customers (interview A2b). Shopify's default segments aren't a VIP group on their own. |
 
 ### 1d. Known quirks
 

@@ -6,7 +6,7 @@ description: >-
   to discount and which to keep at full price, how deep each discount can go
   without losing money after VAT, fees, shipping and returns, which offer type
   fits (percent off, clean price points, spend-more-save-more, free-shipping
-  threshold, bundles, gift with purchase, VIP early access), EU Omnibus price
+  threshold, bundles, gift with purchase, optional VIP early access), EU Omnibus price
   rules, and creating the approved discounts with end dates. Use whenever a
   clothing, shoes, or accessories merchant asks what to put on sale for Black
   Friday or Cyber Monday, how much to discount, whether a sitewide sale is a
@@ -94,7 +94,7 @@ so the interview can confirm facts instead of asking for them.
 
 ### Phase 2 — Pricing interview
 
-Read-only. Follow `references/pricing-interview.md`: batches A–E (positioning
+Read-only. Follow `references/pricing-interview.md`: batches A–E, plus batch V only for merchants with VIP customers (positioning
 and history, goals and **priority ranking**, unit economics including VAT,
 fees, shipping and returns, stock and constraints, customers and offer
 preferences). Ask 2–4 questions at a time, say why each matters, and skip what
@@ -102,7 +102,12 @@ the store already answers. Save `work/bfcm_pricing_brief_<YYYY-MM-DD>.json`
 and read back a summary for a yes.
 
 If the merchant opts out of discounting, Phases 3–5 become advice on non-price
-offers (gift with purchase, VIP perks). Say so.
+offers (gift with purchase, or VIP perks if they have VIP customers). Say so.
+
+**VIP early access is an optional extra.** Ask A2b: "Do you have VIP
+customers?" If no (most shops), skip VIP everywhere: no VIP questions, offers,
+discounts or segments. If yes, ask batch V and plan VIP access as described in
+`discounts-and-omnibus.md`.
 
 ### Phase 3 — Products and safe discount depth
 
@@ -144,7 +149,8 @@ Writes. Follow `references/discounts-and-omnibus.md`:
 
 1. Show the stacking spec in plain English and get a yes.
 2. Build the schedule (automatic discounts targeting products, order offers,
-   optional VIP early access) in the shop's timezone, every discount with
+   VIP early access only if the merchant has VIP customers) in the shop's
+   timezone, every discount with
    `endsAt`.
 3. Validate: descending curve, one discount per product, tests re-run at
    write time on current prices, excludes, discount limit.

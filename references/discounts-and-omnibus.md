@@ -70,21 +70,36 @@ including the merchant's own. The Phase 1 scan counts the existing ones. The pla
 drop an order-level offer, and say which. A `userErrors` limit message at
 write time overrides this number: stop and report it.
 
-### VIP early access
+### VIP early access (optional extra)
 
-Only if the merchant chose a VIP-led sale, or a classic sale with early access.
+**Only if the merchant answered yes to interview A2b** ("Do you have VIP
+customers?"). Otherwise create no VIP discounts and no segments, and don't
+mention VIP in the plan.
 
 - **Depth:** same % as public by default (`pricing-math.md` §7). Deeper only
   if retention is the #1 priority and the product passes its test.
-- **Segment:** list existing segments and offer the obvious candidates.
-  Creating a segment (`segmentCreate(name, query)`) is a write. It goes in the
-  backup and gets rolled back.
+- **Segment:** use the group agreed in interview V2. Creating a segment
+  (`segmentCreate(name, query)`) is a write. It goes in the backup and gets
+  rolled back.
+- **Check membership before scheduling.** A new segment starts with 0 members
+  while Shopify computes it. On a test store, membership appeared about a
+  minute after creation. Read `customerSegmentMembers(segmentId:) { totalCount
+  }` and show the count to the merchant. If it's 0, wait and re-check. Never
+  schedule a VIP discount on an empty segment. Create VIP segments at least a
+  day before VIP access opens.
 - **Context:** this connector's API version supports `context.customerSegments`
   on automatic discounts (checked against the live schema). If a future
   version doesn't, fall back to a discount code (`discountCodeBasicCreate` with
   the same `context`) and tell the merchant VIPs will need the code.
-- **Window:** starts 24–72h before Black Friday 00:00 (merchant picks, default
-  48h). Ends **exactly** at the public `startsAt`.
+- **Window:** starts 24–72h before Black Friday 00:00 (merchant picks in V5,
+  default 48h). **Never longer than 72h.** If the merchant asks for more,
+  explain the cost (lost exclusivity, best stock gone before the public sale)
+  and record their explicit confirmation. Ends **exactly** at the public
+  `startsAt`.
+- **Verified:** a segment-restricted automatic discount applies only to
+  logged-in members. Tested on a test store (Oct 2026) with
+  `draftOrderCalculate`: a VIP member got 20% off, while a non-member and an
+  anonymous cart paid full price.
 - Tell the merchant: segment-restricted automatic discounts only apply to
   logged-in customers Shopify can identify. VIP emails should ask them to log
   in.

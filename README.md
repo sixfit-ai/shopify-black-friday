@@ -46,7 +46,7 @@ This skill replaces gut feel with your own numbers, **product by product**.
 | **1. Pricing scan** | Reads your prices, VAT setting, costs, sales, stock and existing discounts | No |
 | **2. Pricing interview** | Asks about your costs, returns, shipping, fees, goals and **priorities**, a few questions at a time | No |
 | **3. Products and safe discount depth** | Gives every product a role (Protect, Hero, Clearance, Low-return boost, Exclude) and computes its **maximum safe discount**, the money you keep per sale, and how many extra sales the discount needs to pay off | No |
-| **4. Offer design** | Picks the right offer types for your goal (% off, clean price points, add-ons, bundles, free shipping, VIP early access) and presents three scenarios with one recommendation | No |
+| **4. Offer design** | Picks the right offer types for your goal (% off, clean price points, add-ons, bundles, free shipping) and presents three scenarios with one recommendation | No |
 | **5. Create the discounts** | Shows a written plan, backs up your store, creates the discounts after your **yes**, and reads them back to verify | Yes, after approval |
 
 ---
@@ -175,7 +175,10 @@ parcel, return rate, the cost of a return, and stock you need to clear.
   year's real lift when the data exists.
 - **New store?** It works without sales history: it asks which products you expect to sell best
   and which need clearing.
-- **VIP early access** needs customers to be logged in, so Shopify can recognise them.
+- **VIP early access is optional.** The skill asks whether you have VIP customers (loyal repeat
+  buyers, a loyalty programme, an email list you'd reward). If not, it leaves VIP out entirely.
+  If yes, it sets up a VIP-only discount that opens 1–3 days before Black Friday. Tested: only
+  logged-in VIPs get it.
 - **Shopify limits automatic discounts** to 25 active per store. The plan stays within that.
 
 <details>
