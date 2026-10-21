@@ -51,85 +51,80 @@ This skill replaces gut feel with your own numbers, **product by product**.
 
 ---
 
-## See it in action
+## What you need before you start
 
-A real Claude Code session on our test store, from first question to discounts created.
-*The store name and local paths are anonymised, and the merchant's answers are demo values. The
-discounts were deleted after the run.*
+**1. A Shopify store you have admin access to.**
 
-### 1. Ask a question
+**2. Claude, with the Shopify connector switched on and connected to that
+store.** Claude reads your store and creates the discounts through it, using
+your own Shopify permissions. There is no API key to create and no app to
+install in Shopify.
 
-The skill starts by itself: it names the store, counts the days to Black Friday, and notices that
-prices include VAT and that EU price rules apply.
+**3. Code execution switched on in Claude.** Open **Settings > Capabilities**
+and turn on **Code execution and file creation**. Skills need it.
 
-<table>
-<tr>
-<td width="50%"><img src="docs/screenshots/01-prompt.png" alt="The question typed into Claude Code"></td>
-<td width="50%"><img src="docs/screenshots/02-skill-starts.png" alt="The skill loads, names the store and explains the five steps"></td>
-</tr>
-</table>
+**4. Your rough numbers.** Product costs, payment fee %, shipping cost per
+parcel, return rate, the cost of a return, and stock you need to clear.
+Rough is fine, and "I don't know" is a valid answer.
 
-### 2. Pricing scan
+---
 
-A pricing snapshot of the store, and what it means. Here the skill also spots that the sets cost
-exactly the sum of their tees, and that the stock numbers look like placeholders.
+## How it works
 
-<img src="docs/screenshots/03-scan.png" alt="Pricing scan table and findings">
+### 1. Install and verify
 
-### 3. The interview
+**Install**
 
-Four short rounds. Each question says why it matters, and "I don't know" is a valid answer.
+1. Download `shopify-black-friday.skill` from the
+   [Releases page](../../releases/latest): click the file under **Assets**.
+   It is a zip file with a different name, so your browser may warn you about
+   an unfamiliar file type. That is expected.
+2. In Claude, open **Customize > Skills > Add > Upload skill** and upload the file.
+3. In Claude's connector settings, turn on the **Shopify** connector and log in
+   to your store.
 
-<table>
-<tr>
-<td width="50%"><img src="docs/screenshots/04-questions.png" alt="Round 1: stock, costs, priorities, sale approach"></td>
-<td width="50%"><img src="docs/screenshots/05-round2.png" alt="Round 2: full-price margins after VAT, then fees, shipping and margin floor"></td>
-</tr>
-<tr>
-<td width="50%"><img src="docs/screenshots/06-round3.png" alt="Round 3: returns, limits, restocks"></td>
-<td width="50%"><img src="docs/screenshots/07-round4.png" alt="Round 4: VIP list, offer types, targets"></td>
-</tr>
-</table>
+<img src="docs/media/1-install.gif" alt="Downloading the skill from the Releases page and uploading it under Customize > Skills" width="520">
 
-The answers are summarised as a brief you confirm before anything is calculated:
+**Verify**
 
-<img src="docs/screenshots/08-brief.png" alt="The recorded pricing brief for approval">
+- The skill is listed under **Customize > Skills** and switched on.
+- Ask Claude "Which Shopify store are you connected to?" It should answer with
+  your store's name.
 
-### 4. Products and safe discount depth
+### 2. Run the prompt
 
-Every product gets a role, the money you keep per sale after VAT, fees, shipping and returns, and
-the extra volume a discount needs to pay off. When a deep clearance would wipe out the margin on
-a low-price item, the skill says so and offers alternatives.
+Ask in plain English. The skill names your store, counts the days to Black
+Friday, notices whether your prices include VAT and whether EU price rules
+apply, then runs a read-only pricing scan.
 
-<img src="docs/screenshots/09-products.png" alt="Hero, Clearance, Protect and full-price tables with per-sale margins">
+<img src="docs/media/2-run-the-prompt.gif" alt="Typing the question, the skill starting and the pricing scan" width="720">
 
-### 5. Offer design and scenarios
+Any of these work:
 
-Clean set prices, a "€12 add-on" that moves overstocked baby tees without discounting the adult
-tees, and three scenarios with one recommendation tied to the merchant's priorities. It also
-explains what it *didn't* recommend, and why.
+> What should I put on sale for Black Friday? I want to protect my margins.
 
-<img src="docs/screenshots/10-offers.png" alt="Offers, three scenarios and the recommendation">
+> Is 30% off everything a good idea?
 
-### 6. The plan, and approval before every write
+> Black Friday is in 10 days, what discounts should we set up?
 
-A written plan: every discount, its products, dates and audience, the checks it passed, a
-to-do list and the EU notes. Nothing is created until you say yes, and Claude Code asks again
-before each change to the store.
+### 3. Answer the questions
 
-<table>
-<tr>
-<td width="50%"><img src="docs/screenshots/11-plan.png" alt="The discount plan with checks, to-dos and EU notes"></td>
-<td width="50%"><img src="docs/screenshots/12-write-approval.png" alt="Claude Code asking permission before the first Shopify write"></td>
-</tr>
-</table>
+Four short rounds: stock and costs, fees and shipping, returns and limits,
+customers and offers. Each question says why it matters. Your answers are
+summarised as a brief you confirm before anything is calculated.
 
-### 7. Done and verified
+<img src="docs/media/3-answer-the-questions.gif" alt="Answering the four interview rounds and confirming the brief" width="720">
 
-Every discount is read back from Shopify and confirmed: what customers pay, who gets it, and when.
-The answers, product groups and backup are saved as files, and everything can be undone.
+### 4. Discounts are created
 
-<img src="docs/screenshots/13-done.png" alt="Verified discounts and the to-do list">
+Every product gets a role and a safe maximum discount, then you pick one of
+three offer scenarios. You see a written plan, and nothing is created until you
+say yes. Every discount is read back from Shopify and checked against the plan.
+
+<img src="docs/media/4-discounts-created.gif" alt="Product roles, offer scenarios, the plan, approval and the verified discounts" width="720">
+
+*Recorded on our test store. The store name is anonymised, the answers are demo
+values, and the discounts were deleted afterwards.*
 
 ---
 
@@ -146,28 +141,6 @@ The answers, product groups and backup are saved as files, and everything can be
 
 ---
 
-## Setup (about 5 minutes)
-
-1. **claude.ai:** Settings → Capabilities → turn on *Code execution and file creation*.
-2. **Add the skill:** [download shopify-black-friday.skill](https://github.com/sixfit-ai/shopify-black-friday/releases/latest/download/shopify-black-friday.skill),
-   then go to Customize → Skills → upload it.
-3. **Connect your store:** Settings → Connectors → Shopify.
-
-*Using Claude Code instead?* Unzip the `.skill` file into `~/.claude/skills/`.
-
-Then just ask:
-
-- *"What should I put on sale for Black Friday?"*
-- *"Is 30% off everything a good idea?"*
-- *"How deep can my Black Friday discount go without losing money?"*
-- *"Black Friday is in 10 days, what discounts should we set up?"*
-- *"We're a premium brand. Should we even discount?"*
-
-**Have these numbers ready** (rough is fine): product costs, payment fee %, shipping cost per
-parcel, return rate, the cost of a return, and stock you need to clear.
-
----
-
 ## Good to know
 
 - **Pricing only.** No collections, emails, social posts or sale monitoring.
@@ -180,6 +153,19 @@ parcel, return rate, the cost of a return, and stock you need to clear.
   If yes, it sets up a VIP-only discount that opens 1–3 days before Black Friday. Tested: only
   logged-in VIPs get it.
 - **Shopify limits automatic discounts** to 25 active per store. The plan stays within that.
+
+## Using Claude Code instead
+
+Unzip the bundle into your skills folder and restart Claude Code:
+
+```
+unzip ~/Downloads/shopify-black-friday.skill -d ~/.claude/skills/
+```
+
+The answers, product groups and backup are then saved as files in a `work/`
+folder, so you can undo from a later session too.
+
+---
 
 <details>
 <summary><b>For maintainers</b></summary>
